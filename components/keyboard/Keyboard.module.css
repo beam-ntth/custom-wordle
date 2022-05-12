@@ -1,0 +1,57 @@
+.keyboard {
+    height: 100%;
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.keyboardRow {
+    height: 3rem;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 0.3rem;
+}
+
+.letter, .specialLetter {
+    height: 3rem;
+    width: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #000;
+    color: #fff;
+    border-radius: 0.3rem;
+    margin-right: 0.3rem;
+    transition: 0.1s linear;
+    cursor: pointer;
+}
+
+.specialLetter {
+    width: 5rem;
+}
+
+.letter:hover, .specialLetter:hover {
+    background-color: darkgray;
+}
+
+@media (max-width: 425px) {
+    .keyboard {
+        width: 100%;
+    }
+    .letter {
+        height: 40px;
+        width: 25px;
+    }
+
+    .specialLetter {
+        width: 65px;
+    }
+
+    .letter:hover, .specialLetter:hover {
+        background-color: #000;
+    }
+}
