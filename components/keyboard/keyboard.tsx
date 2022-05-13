@@ -7,10 +7,11 @@ type Props = {
     curTry: number,
     setCurTry: Dispatch<SetStateAction<number>>,
     guesses: any[],
-    setGuesses: Dispatch<SetStateAction<any[]>>[]
+    setGuesses: Dispatch<SetStateAction<any[]>>[],
+    error: boolean
 }
 
-const Keyboard = ({ wordInd, setWordInd, curTry, setCurTry, guesses, setGuesses } : Props) => {
+const Keyboard = ({ wordInd, setWordInd, curTry, setCurTry, guesses, setGuesses, error } : Props) => {
     
     const wordLength: number = guesses[0].length
 
@@ -35,6 +36,7 @@ const Keyboard = ({ wordInd, setWordInd, curTry, setCurTry, guesses, setGuesses 
             alert("You LOST")
             return
         }
+        console.log(curTry)
         setWordInd(0)
         setCurTry(curTry+1)
     }

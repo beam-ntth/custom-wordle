@@ -1,4 +1,4 @@
-const allWords = ["women", "nikau","swack","feens","fyles","poled","clags","starn","bindi","woops","fanos",
+const AllWords = ["women", "nikau","swack","feens","fyles","poled","clags","starn","bindi","woops","fanos",
 "cabin","souct","trass","shoat","lefty","durra","hypes","junta","baisa","bises",
 "kipps","sable","abacs","thurl","nurrs","saris","wroth","venal","texas","soman",
 "linds","laden","nolos","pixie","calms","chert","oxbow","groma","nomen","potae",
@@ -1294,4 +1294,4 @@ const allWords = ["women", "nikau","swack","feens","fyles","poled","clags","star
 "whims","doven","pozzy","drees","spect","spent","hends","ovoli","fanes","trode",
 "teaze","motor","geums","grits","kames","death"]
 
-export default allWords
+export default AllWords

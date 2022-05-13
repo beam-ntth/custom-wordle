@@ -85,9 +85,13 @@
 
 
 @media (max-width: 425px) {
-  .grid {
-    width: 100%;
-    flex-direction: column;
+  .container {
+    min-height: 100vh;
+    height: auto;
+  }
+
+  .myo {
+    height: 40px;
   }
 
   .keyboardContainer {

@@ -1,19 +1,31 @@
 import { Dispatch, SetStateAction, useEffect, useState } from 'react'
+import AllWords from '../allPossibleWords'
 import styles from './WordRow.module.css'
 
 type Props = {
     answer: string,
     guess: any[],
+    setWordInd: Dispatch<SetStateAction<number>>,
     rowNum: number,
-    curTry: number
+    curTry: number,
+    setCurTry: Dispatch<SetStateAction<number>>,
+    setError: Dispatch<SetStateAction<boolean>>,
+    setSuccess: Dispatch<SetStateAction<boolean>>
 }
 
-const WordRow = ({ answer, guess, rowNum, curTry } : Props) => {
+const WordRow = ({ answer, guess, setWordInd, rowNum, curTry, setCurTry, setError, setSuccess } : Props) => {
     const [checked, setChecked] = useState(false)
     const [addColor, setAddColor] = useState(Array(answer.length).fill(0))
 
     useEffect(() => {
-        if (curTry > rowNum || curTry == 6) {
+        if ((curTry > rowNum || curTry == 6) && !checked) {
+            if (!AllWords.includes(guess.join("").toLowerCase()) && guess.length === 5) {
+                setError(true)
+                setWordInd(guess.length)
+                setCurTry(rowNum)
+                return
+            }
+            setError(false)
             let newColor = Array(answer.length).fill(0)
             for (let i = 0; i < answer.length; i++) {
                 if (answer.includes(guess[i])) {
@@ -28,6 +40,10 @@ const WordRow = ({ answer, guess, rowNum, curTry } : Props) => {
             }
             setAddColor(newColor)
             setChecked(true)
+            if (newColor.every(x => x === 2)) {
+                setSuccess(true)
+                return
+            }
         }
     }, [curTry])
 
@@ -45,9 +61,7 @@ const WordRow = ({ answer, guess, rowNum, curTry } : Props) => {
         <div className={styles.guessWord}>
             { 
                 checked ?
-                
                 guess.map((x, ind) => {
-                    console.log(addColor)
                     if (ind == guess.length-1) {
                         return <div key={`row_${ind}`} className={getClassName(addColor[ind])} style={{ margin: 0 }}>{x}</div>
                     }
