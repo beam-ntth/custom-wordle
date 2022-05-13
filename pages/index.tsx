@@ -9,12 +9,22 @@ import Setting from '../components/settingPopup/settingPopup'
 import PopUp from '../components/successPopup/popup'
 
 const Home: NextPage = () => {
-  const [answer, setAnswer] = useState("beam".toUpperCase())
+  const [answer, setAnswer] = useState("mycute".toUpperCase())
+  const [hint, setHint] = useState("What you are to me.")
   const [error, setError] = useState(false)
 
+  /**
+   * State for theme setting
+   */
+  const [checked, setChecked] = useState(0)
+
+  /**
+   * States for all the popups
+   */
   const [showSetting, setShowSetting] = useState(false)
   const [showPopup, setShowPopup] = useState(false)
   const [showSuccess, setShowSuccess] = useState(false)
+  const [showLost, setShowLost] = useState(false)
 
   const [hideHint, setHideHint] = useState(true)
 
@@ -33,8 +43,18 @@ const Home: NextPage = () => {
     setShowSuccess(false)
   }
 
+  const getMode = () => {
+    if (checked === 0) {
+        return ""
+    }
+    if (checked === 1) {
+        return `${styles.dark}`
+    }
+    return `${styles.rainbow}`
+  }
+
   return (
-    <div className={styles.container}>
+    <div className={`${styles.container} ${getMode()}`} onKeyDown={e => console.log(e.key)}>
       <Head>
         <title>Create Your Own Custom Wordle</title>
         <meta name="og:title" content="Create Your Own Custom Wordle!" />
@@ -42,16 +62,16 @@ const Home: NextPage = () => {
         <meta charSet="UTF-8" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      { showSetting ? <Setting show={showSetting} setShow={setShowSetting} /> : null }
-      { (showPopup || showSuccess) ? <PopUp success={showSuccess} closePopup={closePopup} /> : null }
+      { showSetting ? <Setting show={showSetting} setShow={setShowSetting} checked={checked} setChecked={setChecked} /> : null }
+      { (showPopup || showSuccess || showLost) ? <PopUp success={showSuccess} loss={showLost} answer={answer} closePopup={closePopup} /> : null }
       <main className={styles.main}>
-        <div className={styles.title}>
+        <div className={`${styles.title} ${getMode()}`}>
           <h1>Custom Wordle!</h1>
           <BsFillGearFill size={40} className={styles.settingIcon} onClick={() => setShowSetting(true)} />
         </div>
         <button className={styles.myo} onClick={() => setShowPopup(true)}>Make your own now!</button>
-        <p>Hint: <span className={ hideHint ? styles.hidden : "" }
-          onClick={() => setHideHint(false)} >Coolest person on earth</span></p>
+        <p className={getMode()}>Hint: <span className={ hideHint ? styles.hidden : "" }
+          onClick={() => setHideHint(false)} >{hint}</span></p>
         { error ? <p>Word doesn't exist in a dictionary</p> : null }
         <div className={styles.wordContainer}>
           <WordRow answer={answer} guess={guess1} rowNum={0} curTry={currentTry} 
@@ -72,7 +92,7 @@ const Home: NextPage = () => {
             curTry={currentTry} setCurTry={setCurrentTry} 
             guesses={[guess1, guess2, guess3, guess4, guess5, guess6]}
             setGuesses={[setGuess1, setGuess2, setGuess3, setGuess4, setGuess5, setGuess6]}
-            error={error} />
+            error={error} setShowLost={setShowLost} />
         </div>
       </main>
 

@@ -2,15 +2,25 @@ import { Dispatch, SetStateAction } from 'react'
 import styles from './ToggleSwitch.module.css'
 
 type Props = {
-    checked: boolean,
-    setChecked: Dispatch<SetStateAction<boolean>>
+    checked: number,
+    setChecked: Dispatch<SetStateAction<number>>
 }
 
 const Switch = ({checked, setChecked} : Props) => {
+    const getMode = () => {
+        if (checked === 0) {
+            return ""
+        }
+        if (checked === 1) {
+            return `${styles.active}`
+        }
+        return `${styles.rainbow}`
+    }
+
     return (
         <label className={styles.switch}>
-            <input type={styles.checkbox} onClick={() => setChecked(!checked)} />
-            <span className={`${styles.slider} ${styles.round} ${checked ? styles.active : ""}`}></span>
+            <input type={'checkbox'} onClick={() => setChecked((checked+1)%3)} />
+            <span className={`${styles.slider} ${styles.round} ${getMode()}`}></span>
         </label>
     )
 }

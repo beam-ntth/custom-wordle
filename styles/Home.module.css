@@ -7,6 +7,14 @@
   align-items: center;
 }
 
+.dark {
+  background-color: #1D1B26;
+}
+
+.rainbow {
+  background: linear-gradient(0deg,rgba(255, 0, 0, 0.8),rgba(255, 154, 0, 0.8) ,rgba(208, 222, 33, 0.8) ,rgba(79, 220, 74, 0.8) ,rgba(28, 127, 238, 0.8) ,rgba(95, 21, 242, 0.8));
+}
+
 .main {
   height: 100%;
   width: 100%;
@@ -24,6 +32,11 @@
 
 .title h1 {
   margin-right: 2rem;
+}
+
+.title.rainbow, .title.dark {
+  color: #fff;
+  background: transparent;
 }
 
 .settingIcon {
@@ -90,11 +103,23 @@
     height: auto;
   }
 
+  .main {
+    margin-bottom: 1rem;
+  }
+
+  .wordContainer {
+    width: 100%;
+  }
+
   .myo {
     height: 40px;
   }
 
   .keyboardContainer {
     width: 90%;
+  }
+
+  .footer {
+    padding: 1rem 0;
   }
 }

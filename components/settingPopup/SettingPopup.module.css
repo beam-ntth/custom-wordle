@@ -45,17 +45,23 @@
 }
 
 .modeSetting {
+    width: 50%;
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
 }
 
 .modeSetting p {
     margin-right: 2rem;
+    width: 50%;
 }
 
 @media (max-width: 425px) {
     .setting {
         width: 95vw;
+    }
+
+    .modeSetting {
+        width: 90%;
     }
 }

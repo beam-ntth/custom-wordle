@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction } from 'react'
+import { Dispatch, SetStateAction, useEffect, useState } from 'react'
 import styles from './Keyboard.module.css'
 
 type Props = {
@@ -8,10 +8,11 @@ type Props = {
     setCurTry: Dispatch<SetStateAction<number>>,
     guesses: any[],
     setGuesses: Dispatch<SetStateAction<any[]>>[],
-    error: boolean
+    error: boolean,
+    setShowLost: Dispatch<SetStateAction<boolean>>
 }
 
-const Keyboard = ({ wordInd, setWordInd, curTry, setCurTry, guesses, setGuesses, error } : Props) => {
+const Keyboard = ({ wordInd, setWordInd, curTry, setCurTry, guesses, setGuesses, error, setShowLost } : Props) => {
     
     const wordLength: number = guesses[0].length
 
@@ -33,12 +34,31 @@ const Keyboard = ({ wordInd, setWordInd, curTry, setCurTry, guesses, setGuesses,
 
     const enterCallBack = () => {
         if (curTry == 5) {
-            alert("You LOST")
+            setShowLost(true)
             return
         }
-        console.log(curTry)
         setWordInd(0)
         setCurTry(curTry+1)
+    }
+
+    // useEffect(() => {
+    //     document.addEventListener('keydown', logKey)
+    // }, [])
+
+    const logKey = (e: any) => {
+        const allAlphabets = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
+        if (e.key == 'Backspace') {
+            deleteCallBack()
+            return
+        }
+        if (e.key == 'Enter') {
+            enterCallBack()
+            return
+        }
+        if (allAlphabets.includes(e.key.toUpperCase())) {
+            letterCallBack(e.key.toUpperCase())
+            return
+        }
     }
 
     return (

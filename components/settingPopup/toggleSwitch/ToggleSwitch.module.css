@@ -2,7 +2,7 @@
 .switch {
     position: relative;
     display: inline-block;
-    width: 60px;
+    width: 90px;
     height: 34px;
 }
   
@@ -47,9 +47,23 @@
 }
   
 .active.slider:before {
-    -webkit-transform: translateX(26px);
-    -ms-transform: translateX(26px);
-    transform: translateX(26px);
+    -webkit-transform: translateX(28px);
+    -ms-transform: translateX(28px);
+    transform: translateX(28px);
+}
+
+.rainbow {
+    background-color: hotpink;
+}
+  
+.rainbow {
+    box-shadow: 0 0 1px hotpink;
+}
+
+.rainbow.slider:before {
+    -webkit-transform: translateX(54px);
+    -ms-transform: translateX(54px);
+    transform: translateX(54px);
 }
 
 .slider.round {
@@ -58,4 +72,7 @@
   
 .slider.round:before {
     border-radius: 50%;
+}
+
+@media (max-width: 425px) {
 }
