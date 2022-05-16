@@ -4,16 +4,16 @@ import getConfig from 'next/config'
 import { FirebaseApp, initializeApp } from "firebase/app";
 import { getFirestore, collection, getDoc, getDocs, doc, setDoc, Firestore } from "firebase/firestore";
 
-const { serverRuntimeConfig } = getConfig()
+const { publicRuntimeConfig } = getConfig()
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-    apiKey: serverRuntimeConfig.firebase_apiKey,
-    authDomain: serverRuntimeConfig.firebase_authDomain,
-    projectId: serverRuntimeConfig.firebase_projectId,
-    storageBucket: serverRuntimeConfig.firebase_storageBucket,
-    messagingSenderId: serverRuntimeConfig.firebase_messagingSenderId,
-    appId: serverRuntimeConfig.firebase_appId
+    apiKey: publicRuntimeConfig.firebase_apiKey,
+    authDomain: publicRuntimeConfig.firebase_authDomain,
+    projectId: publicRuntimeConfig.firebase_projectId,
+    storageBucket: publicRuntimeConfig.firebase_storageBucket,
+    messagingSenderId: publicRuntimeConfig.firebase_messagingSenderId,
+    appId: publicRuntimeConfig.firebase_appId
 }
 const collectionKey = "d05e6c0b-315a-4abb-8a0e-1bece1353255"
 

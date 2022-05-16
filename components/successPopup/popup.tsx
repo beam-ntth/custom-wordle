@@ -24,11 +24,18 @@ const PopUp = ({success, loss, answer, closePopup} : Props) => {
     const [requiredWordError, setRequiredWordError] = useState(false)
     const [requiredHintError, setRequiredHintError] = useState(false)
 
+    const getTime = () : string => {
+        const dt = new Date()
+        const date = `${dt.getDate() < 10 ? `0${dt.getDate()}` : dt.getDate()}`
+        const month = `${dt.getMonth() + 1 < 10 ? `0${dt.getMonth() + 1}` : dt.getMonth() + 1}`
+        return `${month}/${date}/${dt.getFullYear()}`
+    }
+
     const [game, setGame] = useState({
         word: "",
         hint: "",
         mode: 0,
-        date_created: "today"
+        date_created: getTime()
     })
 
     const checkFields = () => {

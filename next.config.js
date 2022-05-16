@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactStrictMode: false,
-  serverRuntimeConfig: {
+  reactStrictMode: true,
+  publicRuntimeConfig: {
     firebase_apiKey: process.env.firebase_apiKey,
     firebase_authDomain: process.env.firebase_authDomain,
     firebase_projectId: process.env.firebase_projectId,

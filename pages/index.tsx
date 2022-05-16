@@ -31,8 +31,8 @@ const Home: NextPage = (props: any) => {
   const wordDoesExist = props.data ? true : false
   const word = wordDoesExist ? props.data : null
 
-  const [answer, setAnswer] = useState(wordDoesExist ? word.word.toUpperCase() : "mycute".toUpperCase())
-  const [hint, setHint] = useState(wordDoesExist ? word.hint : "What you are to me.")
+  const [answer, setAnswer] = useState(wordDoesExist ? word.word.toUpperCase() : "hello".toUpperCase())
+  const [hint, setHint] = useState(wordDoesExist ? word.hint : "How people greet each other")
   const [error, setError] = useState(false)
 
   /**
