@@ -1,16 +1,38 @@
-import type { NextPage } from 'next'
+import type { GetServerSideProps, NextPage } from 'next'
 import Head from 'next/head'
 import Keyboard from '../components/keyboard/keyboard'
 import WordRow from '../components/wordRow/wordRow'
 import styles from '../styles/Home.module.css'
 import { BsFillGearFill } from 'react-icons/bs'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Setting from '../components/settingPopup/settingPopup'
 import PopUp from '../components/successPopup/popup'
+import { getWordleData } from '../firebase_ops/query'
+import { initializeApp } from "firebase/app";
+import { getFirestore } from "firebase/firestore";
 
-const Home: NextPage = () => {
-  const [answer, setAnswer] = useState("mycute".toUpperCase())
-  const [hint, setHint] = useState("What you are to me.")
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const query = context.query.key
+  if (!query) {
+    return { props: { data: null } }
+  }
+
+  const data = await getWordleData(query.toString());
+  // If the game key is invalid, redirect to invalid page
+  if (!data) {
+    context.res.writeHead(301, { Location: '/404' })
+    context.res.end()
+    return { props: { data: null } }
+  }
+  return { props: { data } }
+}
+
+const Home: NextPage = (props: any) => {
+  const wordDoesExist = props.data ? true : false
+  const word = wordDoesExist ? props.data : null
+
+  const [answer, setAnswer] = useState(wordDoesExist ? word.word.toUpperCase() : "mycute".toUpperCase())
+  const [hint, setHint] = useState(wordDoesExist ? word.hint : "What you are to me.")
   const [error, setError] = useState(false)
 
   /**
