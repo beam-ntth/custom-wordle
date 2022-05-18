@@ -8,8 +8,6 @@ import { useEffect, useState } from 'react'
 import Setting from '../components/settingPopup/settingPopup'
 import PopUp from '../components/successPopup/popup'
 import { getWordleData } from '../firebase_ops/query'
-import { initializeApp } from "firebase/app";
-import { getFirestore } from "firebase/firestore";
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const query = context.query.key

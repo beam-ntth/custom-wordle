@@ -1,9 +1,9 @@
 // Import the functions you need from the SDKs you need
 import { v4 as uuidv4 } from 'uuid'
-import getConfig from 'next/config'
 import { FirebaseApp, initializeApp } from "firebase/app";
 import { getFirestore, collection, getDoc, getDocs, doc, setDoc, Firestore } from "firebase/firestore";
 
+import getConfig from 'next/config'
 const { publicRuntimeConfig } = getConfig()
 
 // Your web app's Firebase configuration
@@ -36,13 +36,4 @@ export const getWordleData = async (documentKey: string) => {
     }
     console.log("No such document!");
     return null
-}
-
-export const createNewGame = async (data: any) => {
-    if (db === null) {
-        return ``
-    }
-    const game_id = uuidv4().toString()
-    await setDoc(doc(db, collectionKey, game_id), data);
-    return `https://custom-wordle-lime.vercel.app/?key=${game_id}`
 }

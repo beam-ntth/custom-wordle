@@ -1,9 +1,6 @@
-import { useRouter } from 'next/router'
 import { useState } from 'react'
-import { createNewGame } from '../../firebase_ops/query'
 import CircularProgress from '@mui/material/CircularProgress';
 import styles from './Popup.module.css'
-import { Firestore } from 'firebase/firestore';
 
 type Props = {
     success: boolean,
@@ -57,7 +54,18 @@ const PopUp = ({success, loss, answer, closePopup} : Props) => {
 
     const createGame = async () => {
         setLoading(true)
-        const link = await createNewGame(game);
+        const res = await fetch(`/api/create`, {
+            method: 'POST',
+            mode: 'same-origin',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(game)
+        })
+        if (res.status != 200) {
+            throw new Error("Error while creating the game!")
+        }
+        const link = await res.json()
         setGameLink(link)
         setCreated(true)
         setLoading(false)
